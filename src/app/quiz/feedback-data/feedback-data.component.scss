@@ -1,0 +1,16 @@
+.form-data{
+	&__container {
+		background: #c7c7c7;
+		padding: 2em;
+	}
+	&__inner {
+		width: 80%;
+		margin: auto; 
+	}
+}
+pre {
+	background: #f6f6f6;
+	padding: 2em;
+	border: 1px solid #e1dddd;
+	border-radius: .4em;
+}

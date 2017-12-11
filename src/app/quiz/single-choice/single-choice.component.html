@@ -1,0 +1,31 @@
+<div class="schoice form-group"> 
+	<div class="schoice__item">
+		<p>
+			<span class="schoice__item-count">{{index}}</span> 
+			<i class="schoice__item-icon fa fa-long-arrow-right"></i>
+		</p>
+		<p class="schoice__label">{{qz.headline}}</p>
+	</div>
+
+	<div class="schoice__radio" *ngFor='let choice of qz.choices'>
+	
+	    <div class="pretty p-icon p-round p-pulse" [formGroup]="headerSectionFormGroup">
+
+	        <input type="radio" name="{{fieldName}}" value="{{choice.value}}"
+	        	*ngIf="qz.nextEnable == true" (change)="navTo($event,'')" />
+
+	        <input type="radio" name="{{fieldName}}" value="{{choice.value}}"
+	        	*ngIf="qz.nextEnable == false" (change)="navTo($event, navigateNext)"/>
+
+	        <div class="state p-info">
+	            <i class="icon fa fa-check"></i>
+	            <label>{{choice.label}}</label>
+	        </div>
+	    </div>
+	</div>
+</div>
+
+<p class="schoice__btn-next" 
+	*ngIf="qz.nextEnable && !isLastQ" [ngx-scroll-to]="navigateNext">
+	<span class="schoice__btn-next-text">OK   <i class="fa fa-check"></i></span>
+</p>
