@@ -18,14 +18,15 @@ export class SingleChoiceComponent implements OnInit {
   @Input() headerSectionFormGroup: FormGroup;
   @Input() fieldName: string;
   @Input() qz: any;
-  isTouch: boolean;
+  istest: boolean;
 
   constructor(private _scrollToService: ScrollToService, private _qzProgressSrv: QuizProgressService) {}
 
   ngOnInit() {
 
     var isRequired = (this.qz.required ? Validators.required : null);
-    this.isTouch = false;
+    
+    this.istest = false;
     this.newFormControl = new FormControl(this.selectedValue, isRequired);
     this.headerSectionFormGroup.addControl(this.fieldName, this.newFormControl);
     this.selectedValue = '';
@@ -34,13 +35,15 @@ export class SingleChoiceComponent implements OnInit {
 
   navTo($ev,navId) {
 
+    console.log(this);
+    this.istest = false;
+    
     if(this.selectedValue ==='') {
       this._qzProgressSrv.updateQuizCount('inc');
     }
 
     this.selectedValue = $ev.target.value;
     this.newFormControl.setValue(this.selectedValue);
-    this.isTouch = true;
     
     if(navId) {
 
@@ -50,6 +53,22 @@ export class SingleChoiceComponent implements OnInit {
    
       this._scrollToService.scrollTo(config);
     }
+
+  }
+
+  testfn(navId) {
+    
+    if(!this.headerSectionFormGroup.controls[this.fieldName].valid) {
+      this.istest = true;
+    } else {
+
+      this.istest = false;
+      const config: ScrollToConfigOptions = {
+        target: navId
+      };
+  
+      this._scrollToService.scrollTo(config);
+    } 
 
   }
 
